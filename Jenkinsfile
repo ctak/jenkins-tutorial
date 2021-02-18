@@ -83,7 +83,7 @@ pipeline {
         dir ('./server') {
           sh '''
           npm install &&
-          npm run test
+          ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN} npm run test
           '''
         }
       }
