@@ -19,12 +19,11 @@ pipeline {
       agent any
 
       steps {
-        echo "Lets start Long Journey! ENV: ${ENV}"
         echo 'Clonning Repository'
 
-        git url: 'https://github.com/ctak/jenkins_tutorial.git',
+        git url: 'https://github.com/ctak/jenkins-tutorial.git',
           branch: 'main',
-          credentialsId: 'gittest'
+          credentialsId: 'aws-jenkins'
       }
 
       post {
@@ -83,7 +82,7 @@ pipeline {
         dir ('./server') {
           sh '''
           npm install &&
-          npm run lint
+          npm run test
           '''
         }
       }
@@ -137,7 +136,7 @@ pipeline {
 
         dir ('./server') {
           sh '''
-          // docker rm -f $(docker ps -aq)
+          docker rm -f $(docker ps -aq)
           docker run -p 80:80 -d server
           '''
         }
