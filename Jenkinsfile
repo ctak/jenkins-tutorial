@@ -11,7 +11,7 @@ pipeline {
     AWS_SECRET_ACCESS_KEY = credentials('awsSecretAccessKey')
     AWS_DEFAULT_REGION = 'ap-northeast-2'
     HOME = '.'
-    GITHUB_ACCESS_TOKEN = credentials('githubToken')
+    ACCESS_TOKEN = credentials('githubToken')
   }
 
   stages {
@@ -83,7 +83,7 @@ pipeline {
         dir ('./server') {
           sh '''
           npm install &&
-          ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN} npm run test
+          npm run test
           '''
         }
       }
